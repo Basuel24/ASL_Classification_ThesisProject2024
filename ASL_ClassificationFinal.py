@@ -159,7 +159,6 @@ with tabs[1]:
     except Exception as e:
         print(f"Error in to_image function: {e}")
         return np.zeros((28, 28), dtype=float)
-        
        
     fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
 

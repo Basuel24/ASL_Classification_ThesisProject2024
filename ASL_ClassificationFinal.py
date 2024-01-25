@@ -130,17 +130,10 @@ with tabs[1]:
     mapping_letter = {v: k for k, v in mapping_letter.items()}
     
     def to_image(array, label=True):
-        array = np.array(array)
-    
-    # Check if the array has the expected size for reshaping
-    if len(array) == 28 * 28:
-        start_idx = 1 if label else 0
-        return array[start_idx:].reshape(28, 28).astype(float)
-    else:
-        # Handle the case where the array has an incorrect size
-        print(f"Warning: Unable to reshape array of size {len(array)} into shape (28, 28).")
-        # You might want to return a default image or handle this case differently
-        return np.zeros((28, 28), dtype=float)
+    array = np.array(array)
+    start_idx = 1 if label else 0
+    return array[start_idx:].reshape(28, 28).astype(float)
+
 
     fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
 

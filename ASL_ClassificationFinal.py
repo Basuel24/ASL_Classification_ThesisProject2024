@@ -32,9 +32,16 @@ try:
 except Exception as e:
     st.error(f"Error loading the model: {e}")
 
+def preprocess_image(image_pil):
+    new_image = image_pil.resize((50, 50))
+    grayscale_image = new_image.convert("L")
+    image_input = np.array(grayscale_image)
+    image_input = resize(image_input, (28, 28, 1))
+    image_input = np.expand_dims(image_input, axis=0)
+    return image_input
+
 if "load_state" not in st.session_state:
     st.session_state.load_state = False
-
 # Tab 1
 with tabs[0]:
     class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', '', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y']
@@ -47,14 +54,7 @@ with tabs[0]:
                 if uploaded_file.name == '':
                     st.write('')
                 else:
-                    image_pil = Image.open(uploaded_file)
-                    new_image = image_pil.resize((50, 50))
-                    st.image(new_image, caption="Image Preview")
-
-                    grayscale_image = new_image.convert("L")
-                    image_input = asarray(grayscale_image)
-                    image_input = resize(image_input, (28, 28, 1))
-                    image_input = np.expand_dims(image_input, axis=0)
+                    image_input = preprocess_image(uploaded_file)
 
                     # CNN
                     predictionCNN = modelCNN.predict(image_input)

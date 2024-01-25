@@ -143,15 +143,7 @@ with tabs[1]:
         # You might want to return a default image or handle this case differently
         return np.zeros((28, 28), dtype=float)
 
-
-    
-    #def to_image(array, label=True):
-        #array = np.array(array)
-        #start_idx = 1 if label else 0
-        #return array[start_idx:].reshape(28, 28).astype(float)
-
-    fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12),
-                             subplot_kw={'xticks': [], 'yticks': []})
+    fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
 
     class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', '', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', '']
     a = 0

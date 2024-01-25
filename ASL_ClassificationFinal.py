@@ -163,8 +163,8 @@ for i, ax in enumerate(axes.flat):
     image_input = np.expand_dims(image_input, axis=0)
     
     # Corrected indentation
-    model_pathSA = os.path.join(current_dir, "SA/80 epochs/sa_model.h5")
-    modelCNNSA = tf.keras.models.load_model(model_pathSA)    
+    #model_pathSA = os.path.join(current_dir, "SA/80 epochs/sa_model.h5")
+    modelCNNSA = tf.keras.models.load_model("SA/80 epochs/sa_model.h5")    
     prediction = modelCNNSA.predict(image_input)
     
     MaxPositionindex = np.argmax(prediction, axis=1)

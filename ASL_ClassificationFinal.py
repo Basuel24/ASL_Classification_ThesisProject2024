@@ -54,21 +54,24 @@ with tabs[0]:
                 if uploaded_file.name == '':
                     st.write('')
                 else:
-                    image_pil = Image.open(uploaded_file)
-                    image_input = preprocess_image(image_pil)
+                     try:
+                        image_pil = Image.open(uploaded_file)
+                        image_input = preprocess_image(image_pil)
 
-                    # CNN
-                    predictionCNN = modelCNN.predict(image_input)
-                    MaxPositionCNN = np.argmax(predictionCNN)
-                    confidenceCNN = round(predictionCNN[0, MaxPositionCNN] * 100, 1)
-                    predictionCNN_label = class_names[MaxPositionCNN]
-
-                    # SA
-                    modelSA = tf.keras.models.load_model("SA/80 epochs/sa_model.h5")
-                    predictionSA = modelSA.predict(image_input)
-                    MaxPositionSA = np.argmax(predictionSA)
-                    confidenceSA = round(predictionSA[0, MaxPositionSA] * 100, 1)
-                    predictionSA_label = class_names[MaxPositionSA]
+                        # CNN
+                        predictionCNN = modelCNN.predict(image_input)
+                        MaxPositionCNN = np.argmax(predictionCNN)
+                        confidenceCNN = round(predictionCNN[0, MaxPositionCNN] * 100, 1)
+                        predictionCNN_label = class_names[MaxPositionCNN]
+    
+                        # SA
+                        modelSA = tf.keras.models.load_model("SA/80 epochs/sa_model.h5")
+                        predictionSA = modelSA.predict(image_input)
+                        MaxPositionSA = np.argmax(predictionSA)
+                        confidenceSA = round(predictionSA[0, MaxPositionSA] * 100, 1)
+                        predictionSA_label = class_names[MaxPositionSA]
+                    except Exception as e:
+                        st.error(f"Error processing the image: {e}")
 
                     indicesCNN = np.where(predictionCNN >= 0.0001)
                     arrCNN = predictionCNN[predictionCNN >= 0.0001]

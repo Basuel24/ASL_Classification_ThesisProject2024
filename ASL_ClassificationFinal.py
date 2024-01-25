@@ -107,9 +107,9 @@ with tabs[0]:
 
 # Tab 2
 with tabs[1]:
-    train = pd.read_csv('dataset/train.csv')
-    train_set = np.array(train, dtype='float32')
-    labels = train['label'].values
+    train_df = pd.read_csv('dataset/train.csv')
+    train_set = np.array(train_df, dtype='float32')
+    labels = train_df['label'].values
     alphab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     mapping_letter = {}
     count = 0

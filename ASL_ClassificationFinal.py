@@ -109,7 +109,7 @@ with tabs[0]:
 with tabs[1]:
     train = pd.read_csv('dataset/train.csv')
     train_set = np.array(train)
-    labels = train['label'].values
+    labels = train_df['Label'].values
     alphab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     mapping_letter = {}
     count = 0

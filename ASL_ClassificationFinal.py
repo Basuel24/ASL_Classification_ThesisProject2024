@@ -136,9 +136,8 @@ with tabs[1]:
     
     def to_image(row, label_col='label'):
         array = np.array(row)
-        start_idx = 1 
     try:
-        if label_col in row.index else 0
+        start_idx = 1 if label_col in row.index else 0
     except Exception as e:
         print(f"Error in to_image function: {e}")
 

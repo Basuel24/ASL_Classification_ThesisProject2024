@@ -110,12 +110,13 @@ with tabs[1]:
     train_df = pd.read_csv('dataset/train.csv')
 
     # Convert 'label' column to numeric, handling non-numeric values
-    train_df['label'] = pd.to_numeric(train_df['label'], errors='coerce').fillna(0)
+    #train_df['label'] = pd.to_numeric(train_df['label'], errors='coerce').fillna(0)
+    train_df['label'] = pd.to_numeric(train_df['label'], errors='coerce')
 
-    
-    # Drop rows with missing values in 'label' column
-    train_df = train_df.dropna(subset=['label'])
+    non_numeric_rows = train_df['label'].isna()
 
+    default_value = 0
+    train_df.loc[non_numeric_rows, 'label'] = default_value
     
     # Convert DataFrame to NumPy array
     train_set = np.array(train_df, dtype='float32')

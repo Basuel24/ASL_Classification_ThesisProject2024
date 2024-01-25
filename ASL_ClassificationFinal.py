@@ -26,9 +26,6 @@ modelCNNSA = tf.keras.models.load_model(model_pathSA)
 model_pathCNN = os.path.join(current_dir, "CNN/80 epochs/cnn_model.h5")
 modelCNN = tf.keras.models.load_model(model_pathCNN)
 
-#modelCNN = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
-#modelCNNSA = tf.keras.models.load_model("SA/80 epochs/sa_model.h5")
-
 if "load_state" not in st.session_state:
     st.session_state.load_state = False
 
@@ -139,26 +136,11 @@ with tabs[1]:
     
     def to_image(row, label_col='label'):
         array = np.array(row)
-        start_idx = 1 if label_col in row.index else 0  # Assuming label is present in the DataFrame
-        
+        start_idx = 1 
     try:
-        # Check if the array has elements
-        if len(array[start_idx:]) > 0:
-            # Check if the array has the correct size for reshaping
-            if len(array[start_idx:]) == 28 * 28:
-                return array[start_idx:].reshape(28, 28).astype(float)
-            else:
-                # Handle the case where the array has an incorrect size
-                print(f"Warning: Unable to reshape array of size {len(array[start_idx:])} into shape (28, 28).")
-                # You might want to return a default image or handle this case differently
-                return np.zeros((28, 28), dtype=float)
-        else:
-            # Handle the case where the array has no elements
-            print("Warning: Array has no elements.")
-            return np.zeros((28, 28), dtype=float)
+        if label_col in row.index else 0
     except Exception as e:
         print(f"Error in to_image function: {e}")
-        return np.zeros((28, 28), dtype=float)
 
     fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
     class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', '', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', '']

@@ -140,7 +140,7 @@ with tabs[1]:
     def to_image(row, label_col='label'):
         array = np.array(row)
         start_idx = 1 if label_col in row.index else 0  # Assuming label is present in the DataFrame
-
+        
     try:
         # Check if the array has elements
         if len(array[start_idx:]) > 0:
@@ -159,9 +159,8 @@ with tabs[1]:
     except Exception as e:
         print(f"Error in to_image function: {e}")
         return np.zeros((28, 28), dtype=float)
-       
-    fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
 
+    fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
     class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', '', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', '']
     a = 0
     for i, ax in enumerate(axes.flat):

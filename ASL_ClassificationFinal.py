@@ -119,8 +119,6 @@ with tabs[1]:
     count = 0
     
     train_df = pd.read_csv('dataset/train.csv')
-    train_df = np.array(train_df.drop(columns=['label']), dtype='float32')  # Exclude 'label' column from the array
-    
     train_df.rename(columns={'label': 'Label'}, inplace=True)
     train_df = train_df.sample(frac=1.0).reset_index(drop=True)
     

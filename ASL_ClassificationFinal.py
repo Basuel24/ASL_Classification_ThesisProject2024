@@ -21,7 +21,10 @@ tabs = st.tabs(tab_title)
 
 current_dir = os.getcwd()
 model_pathSA = os.path.join(current_dir, "SA/80 epochs/sa_model.h5")
-modelCNNSA = tf.keras.models.load_model(model_pathSA)
+try:
+    modelCNNSA = tf.keras.models.load_model(model_pathSA)
+except Exception as e:
+    st.error(f"Error loading the model: {e}")
 
 model_pathCNN = os.path.join(current_dir, "CNN/80 epochs/cnn_model.h5")
 modelCNN = tf.keras.models.load_model(model_pathCNN)

@@ -144,7 +144,8 @@ with tabs[1]:
     
     def to_image(array, label=True):
         array = np.array(array)
-        start_idx = 1 if label else 0
+        start_idx = 1 if label in row.index else 0
+        #start_idx = 1 if label else 0
         return array[start_idx:].reshape(28, 28).astype(float)
 
 

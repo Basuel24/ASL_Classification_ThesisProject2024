@@ -145,7 +145,7 @@ with tabs[1]:
     def to_image(array, label=True):
            array = np.array(array)
            start_idx = 1 if label else 0
-       return array[start_idx:].reshape(28, 28).astype(float)
+    return array[start_idx:].reshape(28, 28).astype(float)
 
 
     fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})

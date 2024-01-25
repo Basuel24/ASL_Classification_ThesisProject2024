@@ -107,28 +107,23 @@ with tabs[0]:
 
 # Tab 2
 with tabs[1]:
-    train_df = pd.read_csv('dataset/train.csv')
-
-    # Convert 'label' column to numeric, handling non-numeric values
-    #train_df['label'] = pd.to_numeric(train_df['label'], errors='coerce').fillna(0)
-    train_df['label'] = pd.to_numeric(train_df['label'], errors='coerce')
-
-    non_numeric_rows = train_df['label'].isna()
-
-    default_value = 0
-    train_df.loc[non_numeric_rows, 'label'] = default_value
-    
+    #train = pd.read_csv('dataset/train.csv')
     # Convert DataFrame to NumPy array
-    train_set = np.array(train_df, dtype='float32')
+    #train_df = np.array(train, dtype='float32')
     
-    labels = train_df['label'].values
+    
+    
     alphab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     mapping_letter = {}
     count = 0
     
+    train_df = pd.read_csv('dataset/train.csv')
+    
+    labels = train_df['label'].values
+    
     train_df.rename(columns={'label': 'Label'}, inplace=True)
     train_df = train_df.sample(frac=1.0).reset_index(drop=True)
-
+    
     for i, l in enumerate(alphab):
         mapping_letter[l] = i
     mapping_letter = {v: k for k, v in mapping_letter.items()}

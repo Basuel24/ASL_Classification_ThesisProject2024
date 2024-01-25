@@ -6,6 +6,7 @@ import tensorflow as tf
 import numpy as np
 import pandas as pd
 import matplotlib
+import os
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from numpy import asarray
@@ -17,8 +18,16 @@ st.markdown("<h4 style='text-align: center;'> Enhance Convolutional Neural Netwo
 
 tab_title = ["Test Image", "Baseline (CNN)", "Applied Algorithm (CNN with Augmentation)", "Algorithms Graph"]
 tabs = st.tabs(tab_title)
-modelCNN = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
-modelCNNSA = tf.keras.models.load_model("SA/80 epochs/sa_model.h5")
+
+current_dir = os.getcwd()
+model_pathSA = os.path.join(current_dir, "SA/80 epochs/sa_model.h5")
+modelCNNSA = tf.keras.models.load_model(model_pathSA)
+
+model_pathCNN = os.path.join(current_dir, "CNN/80 epochs/cnn_model.h5")
+modelCNN = tf.keras.models.load_model(model_pathCNN)
+
+#modelCNN = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
+#modelCNNSA = tf.keras.models.load_model("SA/80 epochs/sa_model.h5")
 
 if "load_state" not in st.session_state:
     st.session_state.load_state = False

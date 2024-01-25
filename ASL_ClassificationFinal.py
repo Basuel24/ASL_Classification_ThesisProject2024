@@ -130,9 +130,9 @@ with tabs[1]:
     mapping_letter = {v: k for k, v in mapping_letter.items()}
     
     def to_image(row, label_col='label'):
-    array = np.array(row)
-    start_idx = 1 if label_col in row.index else 0  # Assuming label is present in the DataFrame
-    image_data = array[start_idx:]
+        array = np.array(row)
+        start_idx = 1 if label_col in row.index else 0  # Assuming label is present in the DataFrame
+        image_data = array[start_idx:]
 
     # Check if the array has the correct size for reshaping
     if len(image_data) == 28 * 28:

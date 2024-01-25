@@ -54,7 +54,8 @@ with tabs[0]:
                 if uploaded_file.name == '':
                     st.write('')
                 else:
-                    image_input = preprocess_image(uploaded_file)
+                    image_pil = Image.open(uploaded_file)
+                    image_input = preprocess_image(image_pil)
 
                     # CNN
                     predictionCNN = modelCNN.predict(image_input)

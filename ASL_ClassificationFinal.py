@@ -146,6 +146,7 @@ with tabs[1]:
     def to_image(row, label_col='label'):
         array = np.array(row)
         start_idx = 1 if label_col in row.index else 0  # Assuming label is present in the DataFrame
+
     try:
         # Check if the array has the correct size for reshaping
         if len(array[start_idx:]) == 28 * 28:

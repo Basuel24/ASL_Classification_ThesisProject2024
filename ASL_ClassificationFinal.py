@@ -126,11 +126,10 @@ with tabs[1]:
     alphab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     mapping_letter = {}
     count = 0
-    
+
     train_df = pd.read_csv('dataset/train.csv')
     train_df.rename(columns={'label': 'Label'}, inplace=True)
     train_df = train_df.sample(frac=1.0).reset_index(drop=True)
-    
     mapping_letter = {}
 
     for i, l in enumerate(alphab):
@@ -140,9 +139,9 @@ with tabs[1]:
     
     def to_image(array, label=True):
        array = np.array(array)
-       start_idx = 1 if label else 0
+       start_idx = 0 if label else 1
        return array[start_idx:].reshape(28, 28).astype(float)
-
+       
     fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
 
     class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', '', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', '']

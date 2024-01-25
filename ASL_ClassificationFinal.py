@@ -108,7 +108,16 @@ with tabs[0]:
 # Tab 2
 with tabs[1]:
     train_df = pd.read_csv('dataset/train.csv')
+
+    # Convert 'label' column to numeric, handling non-numeric values
+    train_df['label'] = pd.to_numeric(train_df['label'], errors='coerce')
+    
+    # Drop rows with missing values
+    train_df = train_df.dropna()
+    
+    # Convert DataFrame to NumPy array
     train_set = np.array(train_df, dtype='float32')
+
     labels = train_df['label'].values
     alphab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     mapping_letter = {}

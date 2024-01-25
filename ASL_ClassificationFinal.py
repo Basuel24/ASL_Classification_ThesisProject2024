@@ -128,10 +128,6 @@ with tabs[1]:
     count = 0
     
     train_df = pd.read_csv('dataset/train.csv')
-    #train_df = np.array(train_df, dtype='float32')
-    # Replace non-numeric values with NaN in numeric columns
-    #train_df[numeric_columns] = train_df[numeric_columns].apply(pd.to_numeric, errors='coerce')
-
     train_df.rename(columns={'label': 'Label'}, inplace=True)
     train_df = train_df.sample(frac=1.0).reset_index(drop=True)
     
@@ -142,35 +138,18 @@ with tabs[1]:
     
     mapping_letter = {v: k for k, v in mapping_letter.items()}
     
-    def to_image(row, label_col='label'):
-        array = np.array(row)
-        start_idx = 1 if label_col in row.index else 0  # Assuming label is present in the DataFrame
-    try:
-        # Check if the array has elements
-        if len(array[start_idx:]) > 0:
-            # Check if the array has the correct size for reshaping
-            if len(array[start_idx:]) == 28 * 28:
-                return array[start_idx:].reshape(28, 28).astype(float)
-            else:
-                # Handle the case where the array has an incorrect size
-                print(f"Warning: Unable to reshape array of size {len(array[start_idx:])} into shape (28, 28).")
-                # You might want to return a default image or handle this case differently
-                return np.zeros((28, 28), dtype=float)
-        else:
-            # Handle the case where the array has no elements
-            print("Warning: Array has no elements.")
-            return np.zeros((28, 28), dtype=float)
-    except Exception as e:
-        print(f"Error in to_image function: {e}")
-        return np.zeros((28, 28), dtype=float)
-
+    def to_image(array, label=True):
+       array = np.array(array)
+       start_idx = 1 if label else 0
+       return array[start_idx:].reshape(28, 28).astype(float)
 
     fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
 
     class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', '', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', '']
     a = 0
     for i, ax in enumerate(axes.flat):
-        inputImage = to_image(train_df.iloc[i], label_col='label')
+        #inputImage = to_image(train_df.iloc[i], label='label')
+        inputImage = to_image(train_df.iloc[i])
         img = inputImage
         image_input = asarray(inputImage)
         image_input = np.expand_dims(image_input, axis=0)

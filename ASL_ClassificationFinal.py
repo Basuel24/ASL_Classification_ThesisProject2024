@@ -122,13 +122,18 @@ with tabs[1]:
     train_df.rename(columns={'label': 'Label'}, inplace=True)
     train_df = train_df.sample(frac=1.0).reset_index(drop=True)
     
+    mapping_letter = {}
+
     for i, l in enumerate(alphab):
         mapping_letter[l] = i
-        mapping_letter = {v: k for k, v in mapping_letter.items()}
-        def to_image(row, label_col='label'):
+    
+    mapping_letter = {v: k for k, v in mapping_letter.items()}
+    
+    def to_image(row, label_col='label'):
         array = np.array(row)
         start_idx = 1 if label_col in row.index else 0  # Assuming label is present in the DataFrame
-    return array[start_idx:].reshape(28, 28).astype(float)
+        return array[start_idx:].reshape(28, 28).astype(float)
+
     
     #def to_image(array, label=True):
         #array = np.array(array)

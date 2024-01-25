@@ -124,10 +124,10 @@ with tabs[1]:
     
     for i, l in enumerate(alphab):
         mapping_letter[l] = i
-    mapping_letter = {v: k for k, v in mapping_letter.items()}
-    def to_image(row, label_col='label'):
-    array = np.array(row)
-    start_idx = 1 if label_col in row.index else 0  # Assuming label is present in the DataFrame
+        mapping_letter = {v: k for k, v in mapping_letter.items()}
+        def to_image(row, label_col='label'):
+        array = np.array(row)
+        start_idx = 1 if label_col in row.index else 0  # Assuming label is present in the DataFrame
     return array[start_idx:].reshape(28, 28).astype(float)
     
     #def to_image(array, label=True):

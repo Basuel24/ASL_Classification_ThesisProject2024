@@ -109,11 +109,12 @@ with tabs[0]:
 with tabs[1]:
     train = pd.read_csv('dataset/train.csv')
     train_set = np.array(train)
+    train_df = pd.read_csv('dataset/train.csv')
     labels = train_df['Label'].values
     alphab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     mapping_letter = {}
     count = 0
-    train_df = pd.read_csv('dataset/train.csv')
+    
     train_df.rename(columns={'label': 'Label'}, inplace=True)
     train_df = train_df.sample(frac=1.0).reset_index(drop=True)
 

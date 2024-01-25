@@ -55,6 +55,8 @@ with tabs[0]:
                     st.write('')
                 else:
                     try:
+                         modelCNNSA = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
+                        
                         image_pil = Image.open(uploaded_file)
                         image_input = preprocess_image(image_pil)
                 

@@ -128,6 +128,7 @@ with tabs[1]:
     count = 0
     
     train_df = pd.read_csv('dataset/train.csv')
+    train_df = np.array(train, dtype='float32')
     train_df.rename(columns={'label': 'Label'}, inplace=True)
     train_df = train_df.sample(frac=1.0).reset_index(drop=True)
     
@@ -148,8 +149,6 @@ with tabs[1]:
     class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', '', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', '']
     a = 0
     for i, ax in enumerate(axes.flat):
-        #inputImage = to_image(train_df.iloc[i], label_col='label')
-        #inputImage = to_image(train_df.iloc[i])
         inputImage = to_image(train_df.iloc[i], 'label')
         img = inputImage
         image_input = asarray(inputImage)

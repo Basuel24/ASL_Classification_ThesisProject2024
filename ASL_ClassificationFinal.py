@@ -130,7 +130,7 @@ with tabs[1]:
     mapping_letter = {v: k for k, v in mapping_letter.items()}
     
     def to_image(array, label=True):
-    array = np.array(array)
+        array = np.array(array)
     
     # Check if the array has the expected size for reshaping
     if len(array) == 28 * 28:

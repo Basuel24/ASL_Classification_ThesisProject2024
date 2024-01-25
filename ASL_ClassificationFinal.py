@@ -20,14 +20,17 @@ tab_title = ["Test Image", "Baseline (CNN)", "Applied Algorithm (CNN with Augmen
 tabs = st.tabs(tab_title)
 
 current_dir = os.getcwd()
+model_pathCNN = os.path.join(current_dir, "CNN/80 epochs/cnn_model.h5")
 model_pathSA = os.path.join(current_dir, "SA/80 epochs/sa_model.h5")
 try:
     modelCNNSA = tf.keras.models.load_model(model_pathSA)
 except Exception as e:
     st.error(f"Error loading the model: {e}")
 
-model_pathCNN = os.path.join(current_dir, "CNN/80 epochs/cnn_model.h5")
-modelCNN = tf.keras.models.load_model(model_pathCNN)
+try:
+    modelCNN = tf.keras.models.load_model(model_pathCNN)
+except Exception as e:
+    st.error(f"Error loading the model: {e}")
 
 if "load_state" not in st.session_state:
     st.session_state.load_state = False

@@ -148,8 +148,8 @@ with tabs[1]:
     class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', '', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', '']
     a = 0
     for i, ax in enumerate(axes.flat):
-        #inputImage = to_image(train_df.iloc[i], label='label')
-        inputImage = to_image(train_df.iloc[i])
+        inputImage = to_image(train_df.iloc[i], label='label')
+        #inputImage = to_image(train_df.iloc[i])
         img = inputImage
         image_input = asarray(inputImage)
         image_input = np.expand_dims(image_input, axis=0)

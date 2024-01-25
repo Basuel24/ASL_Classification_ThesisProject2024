@@ -111,15 +111,15 @@ with tabs[1]:
     # Convert DataFrame to NumPy array
     #train_df = np.array(train, dtype='float32')
     
-    
+    import pandas as pd
+    import numpy as np
     
     alphab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     mapping_letter = {}
     count = 0
     
     train_df = pd.read_csv('dataset/train.csv')
-    
-    labels = train_df['label'].values
+    train_df = np.array(train_df.drop(columns=['label']), dtype='float32')  # Exclude 'label' column from the array
     
     train_df.rename(columns={'label': 'Label'}, inplace=True)
     train_df = train_df.sample(frac=1.0).reset_index(drop=True)

@@ -144,32 +144,35 @@ with tabs[1]:
     fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
     class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', '', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', '']
     a = 0
-    for i, ax in enumerate(axes.flat):
-        inputImage = to_image(train_df.iloc[i], label_col='label')
-        img = inputImage
-        image_input = asarray(inputImage)
-        image_input = np.expand_dims(image_input, axis=0)
-        prediction = modelCNNSA.predict(image_input)
-        MaxPositionindex = np.argmax(prediction, axis=1)
-        title = mapping_letter[train_df.Label[i]]
+    # Inside the for loop
+for i, ax in enumerate(axes.flat):
+    inputImage = to_image(train_df.iloc[i], label_col='label')
+    img = inputImage
+    image_input = asarray(inputImage)
+    image_input = np.expand_dims(image_input, axis=0)
+    
+    # Corrected indentation
+    prediction = modelCNNSA.predict(image_input)
+    
+    MaxPositionindex = np.argmax(prediction, axis=1)
+    title = mapping_letter[train_df.Label[i]]
 
-        indices = np.where(np.asarray(prediction) >= 0.0001)
-        arr = np.asarray(prediction)[np.asarray(prediction) >= 0.0001]
+    indices = np.where(np.asarray(prediction) >= 0.0001)
+    arr = np.asarray(prediction)[np.asarray(prediction) >= 0.0001]
 
-
-        if title == class_names[MaxPositionindex[0]]:
-            ax.set_title("T: (" + title + ") P: (" + class_names[MaxPositionindex[0]] + ") ", fontsize=15).set_color('black')
-            ax.imshow(img)
-            for j in range(len(arr)):
-                ax.set_ylabel("%0.2f%%" % (arr[j] * 100))
-                ax.set_xlabel("correct")
-            count += 1
-        else:
-            ax.set_title("T: (" + title + ") P: (" + class_names[MaxPositionindex[0]] + ") ", fontsize=15).set_color('red')
-            ax.imshow(img, cmap='gray')
-            for j in range(len(arr)):
-                ax.set_ylabel("%0.2f%%" % (arr[j] * 100))
-                ax.set_xlabel("wrong").set_color('red')
+    if title == class_names[MaxPositionindex[0]]:
+        ax.set_title("T: (" + title + ") P: (" + class_names[MaxPositionindex[0]] + ") ", fontsize=15).set_color('black')
+        ax.imshow(img)
+        for j in range(len(arr)):
+            ax.set_ylabel("%0.2f%%" % (arr[j] * 100))
+            ax.set_xlabel("correct")
+        count += 1
+    else:
+        ax.set_title("T: (" + title + ") P: (" + class_names[MaxPositionindex[0]] + ") ", fontsize=15).set_color('red')
+        ax.imshow(img, cmap='gray')
+        for j in range(len(arr)):
+            ax.set_ylabel("%0.2f%%" % (arr[j] * 100))
+            ax.set_xlabel("wrong").set_color('red')
 
     st.markdown("<h5 style='text-align: left;'> Predicted = (" + str(count) + "/40) </h5>", unsafe_allow_html=True)
     plt.tight_layout(pad=0.5)

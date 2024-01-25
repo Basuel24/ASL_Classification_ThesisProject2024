@@ -149,7 +149,8 @@ with tabs[1]:
     try:
         # Check if the array has the correct size for reshaping
         if len(array[start_idx:]) == 28 * 28:
-        return array[start_idx:].reshape(28, 28).astype(float)
+            #return array[start_idx:].reshape(28, 28).astype(float)
+            print(f"If Warning: Unable to reshape array of size {len(array[start_idx:])} into shape (28, 28).")
         else:
             # Handle the case where the array has an incorrect size
             print(f"Warning: Unable to reshape array of size {len(array[start_idx:])} into shape (28, 28).")

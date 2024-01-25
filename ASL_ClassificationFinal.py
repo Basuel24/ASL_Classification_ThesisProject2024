@@ -156,6 +156,12 @@ for i, ax in enumerate(axes.flat):
     img = inputImage
     image_input = asarray(inputImage)
     image_input = np.expand_dims(image_input, axis=0)
+
+    # Ensure input shape
+    print("Input Shape:", image_input.shape)
+    
+    # Check model summary
+    print(modelCNNSA.summary())
     
     # Corrected indentation
     prediction = modelCNNSA.predict(image_input)

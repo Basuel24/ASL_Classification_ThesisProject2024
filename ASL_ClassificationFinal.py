@@ -140,8 +140,9 @@ with tabs[1]:
         MaxPositionindex = np.argmax(prediction, axis=1)
         title = mapping_letter[train_df.Label[i]]
 
-        indices = np.where(prediction >= 0.0001)
-        arr = prediction[prediction >= 0.0001]
+        indices = np.where(np.asarray(prediction) >= 0.0001)
+        arr = np.asarray(prediction)[np.asarray(prediction) >= 0.0001]
+
 
         if title == class_names[MaxPositionindex[0]]:
             ax.set_title("T: (" + title + ") P: (" + class_names[MaxPositionindex[0]] + ") ", fontsize=15).set_color('black')
@@ -179,8 +180,9 @@ with tabs[2]:
         MaxPositionindex = np.argmax(predictionSA, axis=1)
         title = mapping_letter[train_df.Label[i]]
 
-        indices = np.where(prediction >= 0.0001)
-        arr = prediction[prediction >= 0.0001]
+        indices = np.where(np.asarray(prediction) >= 0.0001)
+        arr = np.asarray(prediction)[np.asarray(prediction) >= 0.0001]
+
 
         if title == class_names[MaxPositionindex[0]]:
             ax.set_title("T: (" + title + ") P: (" + class_names[MaxPositionindex[0]] + ")", fontsize=15).set_color('black')

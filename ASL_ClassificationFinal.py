@@ -142,31 +142,18 @@ with tabs[1]:
     
     mapping_letter = {v: k for k, v in mapping_letter.items()}
     
-    def to_image(row, label_col='label'):
-        array = np.array(row)
-        start_idx = 1 if label_col in row.index else 0  # Assuming label is present in the DataFrame
+    def to_image(array, label=True):
+           array = np.array(array)
+           start_idx = 1 if label else 0
+       return array[start_idx:].reshape(28, 28).astype(float)
 
-    try:
-        # Check if the array has the correct size for reshaping
-        if len(array[start_idx:]) == 28 * 28:
-            #return array[start_idx:].reshape(28, 28).astype(float)
-            print(f"If Warning: Unable to reshape array of size {len(array[start_idx:])} into shape (28, 28).")
-        else:
-            # Handle the case where the array has an incorrect size
-            print(f"Warning: Unable to reshape array of size {len(array[start_idx:])} into shape (28, 28).")
-            # You might want to return a default image or handle this case differently
-            return np.zeros((28, 28), dtype=float)
-    except Exception as e:
-        print(f"Error in to_image function: {e}")
-        return np.zeros((28, 28), dtype=float)
 
     fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
 
     class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', '', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', '']
     a = 0
     for i, ax in enumerate(axes.flat):
-        #inputImage = to_image(train_df.iloc[i], label='label')
-        inputImage = to_image(train_df.iloc[i], label_col='label')
+        inputImage = to_image(train_df.iloc[i], label='label')
         img = inputImage
         image_input = asarray(inputImage)
         image_input = np.expand_dims(image_input, axis=0)

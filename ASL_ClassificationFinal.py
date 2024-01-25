@@ -73,53 +73,53 @@ with tabs[0]:
                     except Exception as e:
                         st.error(f"Error processing the image: {e}")
 
-                    indicesCNN = np.where(predictionCNN >= 0.0001)
-                    arrCNN = predictionCNN[predictionCNN >= 0.0001]
-
-                    indicesSA = np.where(predictionSA >= 0.0001)
-                    arrSA = predictionSA[predictionSA >= 0.0001]
-
-                    # Selection sort descending order using CNN
-                    for i in range(len(arrCNN)):
-                        for j in range(i + 1, len(arrCNN)):
-                            if arrCNN[i] < arrCNN[j]:
-                                arrCNN[i], arrCNN[j] = arrCNN[j], arrCNN[i]
-                                indicesCNN[1][i], indicesCNN[1][j] = indicesCNN[1][j], indicesCNN[1][i]
-
-                    # Selection sort descending order using SA
-                    for i in range(len(arrSA)):
-                        for j in range(i + 1, len(arrSA)):
-                            if arrSA[i] < arrSA[j]:
-                                arrSA[i], arrSA[j] = arrSA[j], arrSA[i]
-                                indicesSA[1][i], indicesSA[1][j] = indicesSA[1][j], indicesSA[1][i]
-
-                    # Create a graph using the predicted accuracy data
-                    fig = plt.figure(figsize=(12, 8))
-                    plt.subplot(2, 2, 1)
-                    plt.ylabel('Accuracy')
-                    plt.xlabel('Letters')
-                    data = []
-                    for i in range(min(5, len(arrCNN))):
-                        langs = [class_names[indicesCNN[1][i]]]
-                        students = arrCNN[i]
-                        percentage = " %0.2f%%" % (arrCNN[i] * 100)
-                        plt.bar(langs, students, bottom=None, align='center', data=None)
-                        plt.text(langs, students, percentage, ha='center')
-
-                    plt.legend()
-                    plt.title('CNN Prediction Graph')
-
-                    plt.subplot(2, 2, 2)
-                    for i in range(min(5, len(arrSA))):
-                        langs = [class_names[indicesSA[1][i]]]
-                        students = arrSA[i]
-                        percentage = " %0.2f%%" % (arrSA[i] * 100)
-                        plt.bar(langs, students, bottom=None, align='center', data=None)
-                        plt.text(langs, students, percentage, ha='center')
-
-                    plt.legend()
-                    plt.title('CNN_SA Prediction Graph')
-                    st.pyplot(fig)
+                        indicesCNN = np.where(predictionCNN >= 0.0001)
+                        arrCNN = predictionCNN[predictionCNN >= 0.0001]
+    
+                        indicesSA = np.where(predictionSA >= 0.0001)
+                        arrSA = predictionSA[predictionSA >= 0.0001]
+    
+                        # Selection sort descending order using CNN
+                        for i in range(len(arrCNN)):
+                            for j in range(i + 1, len(arrCNN)):
+                                if arrCNN[i] < arrCNN[j]:
+                                    arrCNN[i], arrCNN[j] = arrCNN[j], arrCNN[i]
+                                    indicesCNN[1][i], indicesCNN[1][j] = indicesCNN[1][j], indicesCNN[1][i]
+    
+                        # Selection sort descending order using SA
+                        for i in range(len(arrSA)):
+                            for j in range(i + 1, len(arrSA)):
+                                if arrSA[i] < arrSA[j]:
+                                    arrSA[i], arrSA[j] = arrSA[j], arrSA[i]
+                                    indicesSA[1][i], indicesSA[1][j] = indicesSA[1][j], indicesSA[1][i]
+    
+                        # Create a graph using the predicted accuracy data
+                        fig = plt.figure(figsize=(12, 8))
+                        plt.subplot(2, 2, 1)
+                        plt.ylabel('Accuracy')
+                        plt.xlabel('Letters')
+                        data = []
+                        for i in range(min(5, len(arrCNN))):
+                            langs = [class_names[indicesCNN[1][i]]]
+                            students = arrCNN[i]
+                            percentage = " %0.2f%%" % (arrCNN[i] * 100)
+                            plt.bar(langs, students, bottom=None, align='center', data=None)
+                            plt.text(langs, students, percentage, ha='center')
+    
+                        plt.legend()
+                        plt.title('CNN Prediction Graph')
+    
+                        plt.subplot(2, 2, 2)
+                        for i in range(min(5, len(arrSA))):
+                            langs = [class_names[indicesSA[1][i]]]
+                            students = arrSA[i]
+                            percentage = " %0.2f%%" % (arrSA[i] * 100)
+                            plt.bar(langs, students, bottom=None, align='center', data=None)
+                            plt.text(langs, students, percentage, ha='center')
+    
+                        plt.legend()
+                        plt.title('CNN_SA Prediction Graph')
+                        st.pyplot(fig)
 
 # Tab 2
 with tabs[1]:

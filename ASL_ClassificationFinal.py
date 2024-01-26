@@ -149,28 +149,38 @@ with tabs[1]:
     import pandas as pd
     import numpy as np
     import random
-    import matplotlib.pyplot as plt 
+    import matplotlib.pyplot as plt
+    
+    # Load the dataset
     train = pd.read_csv('dataset/sign_mnist_train.csv')
-    train_set = np.array(train, dtype = 'float32')
     
-    class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y' ]
+    # Exclude the 'label' column from the conversion to NumPy array
+    train_set = np.array(train.drop(columns=['label']), dtype='float32')
     
-    # Define the dimensions of the plot grid 
+    class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y']
+    
+    # Define the dimensions of the plot grid
     W_grid = 5
     L_grid = 5
-    fig, axes = plt.subplots(L_grid, W_grid, figsize = (10,10))
-    axes = axes.ravel() # flaten the 15 x 15 matrix into 225 array
-    n_train = len(train_set) # get the length of the train dataset
+    fig, axes = plt.subplots(L_grid, W_grid, figsize=(10, 10))
+    axes = axes.ravel()  # flatten the 5x5 matrix into a 1D array
+    n_train = len(train_set)
+    
     # Select a random number from 0 to n_train
-    for i in np.arange(0, W_grid * L_grid): # create evenly spaces variables 
+    for i in np.arange(0, W_grid * L_grid):
         # Select a random number
         index = np.random.randint(0, n_train)
-        # read and display an image with the selected index    
-        axes[i].imshow( train_set[index,1:].reshape((28,28)) )
-        label_index = int(train_set[index,0])
-        axes[i].set_title(class_names[label_index], fontsize = 8)
+        
+        # Read and display an image with the selected index
+        axes[i].imshow(train_set[index].reshape((28, 28)))
+        
+        label_index = int(train['label'][index])  # Access the label from the original DataFrame
+        axes[i].set_title(class_names[label_index], fontsize=8)
         axes[i].axis('off')
+    
     plt.subplots_adjust(hspace=0.4)
+    plt.show()
+
 ################################################################################################
     #end of CNN Baseline Prediction
 ################################################################################################

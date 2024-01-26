@@ -165,10 +165,9 @@ with tabs[1]:
         mapping_letter[l] = i
     mapping_letter = {v:k for k,v in mapping_letter.items()}
 ##################################################################
-    def to_image(array, label = True):
+    def to_image(row, label = True):
         # Reshape an array into an image format
-        array = np.array([array])
-        print(array)
+        array = np.array([row])
         start_idx = 1 if label else 0
         return array[start_idx:].reshape(28,28).astype(float)
 ##################################################################

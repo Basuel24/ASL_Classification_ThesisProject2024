@@ -44,11 +44,7 @@ with tabs[0]:
                     image_input = resize(image_input, (28, 28, 1))
                     image_input = np.expand_dims(image_input, axis = 0)
                     #CNN
-                    modelCNN = tf.keras.models.load_model("CNN/50epoch_CNN_model.h5")
-                    #modelCNN = tf.keras.models.load_model("CNN/cnn_model.h5")
                     modelCNN = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
-                    
-                    
                     predictionCNN = modelCNN.predict(image_input)
                     MaxPositionCNN=np.argmax(predictionCNN)  
                     confidenceCNN = round(predictionCNN[0,MaxPositionCNN]*100, 1)
@@ -56,8 +52,6 @@ with tabs[0]:
                     
                     #SA
                     modelSA = tf.keras.models.load_model("SA/80 epochs/sa_model.h5")
-                    #modelSA = tf.keras.models.load_model("SA/sa_model.h5")
-                    
                     predictionSA = modelSA.predict(image_input) 
                     MaxPositionSA=np.argmax(predictionSA)  
                     confidenceSA = round(predictionSA[0,MaxPositionSA]*100, 1)

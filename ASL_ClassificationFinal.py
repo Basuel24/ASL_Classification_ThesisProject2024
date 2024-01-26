@@ -158,34 +158,35 @@ from PIL import Image
 # Load your dataset
 df = pd.read_csv('dataset/train.csv')
 
-# Display images in a 5x5 grid
-st.title("Image Display from DataFrame - 5x5 Grid")
+# Display 5 rows and 5 columns of images
+st.title("Image Display - 5x5 Grid")
 
-# Check if the 'image_path' column exists in the DataFrame
-if 'image_path' in df.columns:
+# Check if the DataFrame is not empty
+if not df.empty:
     # Check if there are enough images to display
     if len(df) >= 25:
         # Create a grid layout
-        col1, col2, col3, col4, col5 = st.beta_columns(5)
+        for i in range(5):
+            st.write("\n")
+            row = st.beta_container()
 
-        # Loop through each row in the DataFrame
-        for index, row in df.iterrows():
-            image_path = row['image_path']
+            # Loop through each column in the row
+            for j in range(5):
+                index = i * 5 + j
 
-            # Open the image using Pillow (PIL)
-            image = Image.open(image_path)
+                # Check if the index is within the number of rows in the DataFrame
+                if index < len(df):
+                    # Open the image using Pillow (PIL)
+                    image_path = df['image_path'].iloc[index]
+                    image = Image.open(image_path)
 
-            # Display the image in the corresponding column
-            with eval(f"col{index % 5 + 1}"):
-                st.image(image, caption=f"Image {index + 1}", use_column_width=True)
-
-            # Add a newline after every 5 images
-            if (index + 1) % 5 == 0 and index != 0:
-                st.write("\n")
+                    # Display the image in the column
+                    with row:
+                        st.image(image, caption=f"Image {index + 1}", use_column_width=True)
     else:
         st.warning("Not enough images in the dataset to display a 5x5 grid.")
 else:
-    st.warning("The 'image_path' column is not found in the DataFrame.")
+    st.warning("The DataFrame is empty.")
 
 ################################################################################################
     #end of CNN Baseline Prediction

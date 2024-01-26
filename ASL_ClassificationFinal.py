@@ -166,11 +166,11 @@ with tabs[1]:
     mapping_letter = {v:k for k,v in mapping_letter.items()}
 ##################################################################
     def to_image(array, start_idx=0):
-    if len(array) == 0:
-        # Handle empty array case (return a default image or raise an error)
-        raise ValueError("Input array is empty")
-    else:
-        return array[start_idx:].reshape(28, 28).astype(float)
+        if len(array) == 0:
+            # Handle empty array case (return a default image or raise an error)
+            raise ValueError("Input array is empty")
+        else:
+            return array[start_idx:].reshape(28, 28).astype(float)
 ##################################################################
     
     #def to_image(array, label = True):

@@ -152,25 +152,25 @@ with tabs[0]:
     
 ################################################################################################
 with tabs[1]:
+    train = pd.read_csv('dataset/train.csv')
+    train_set = np.array(train, dtype = 'float32')
+    labels = train['label'].values
 ##################################################################
     alphab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     mapping_letter = {}
     count = 0
 ##################################################################
     train_df = pd.read_csv('dataset/train.csv')
-    train_df = np.array(train_df, dtype = 'float32')
     train_df.rename(columns={'label':'Label'},inplace = True)
     train_df = train_df.sample(frac = 1.0).reset_index(drop = True)
-    
-
 ##################################################################
     for i,l in enumerate(alphab):
         mapping_letter[l] = i
     mapping_letter = {v:k for k,v in mapping_letter.items()}
 ##################################################################
-    def to_image(row, label = True):
+    def to_image(array, label = True):
         # Reshape an array into an image format
-        array = np.array([row])
+        array = np.array(array)
         start_idx = 1 if label else 0
         return array[start_idx:].reshape(28,28).astype(float)
 ##################################################################

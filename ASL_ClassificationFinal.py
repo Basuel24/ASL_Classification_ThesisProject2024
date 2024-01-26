@@ -147,8 +147,8 @@ with tabs[0]:
 ################################################################################################
 with tabs[1]:
     import random
-    train = pd.read_csv('dataset/train.csv')
-    train_set = np.array(train, dtype = 'float32')
+    train_set = pd.read_csv('dataset/train.csv')
+    #train_set = np.array(train, dtype = 'float32')
     class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y' ]
     
     # Define the dimensions of the plot grid 

@@ -150,23 +150,22 @@ with tabs[1]:
     import numpy as np
     import random
     import matplotlib.pyplot as plt 
-    train = pd.read_csv('dataset/sign_mnist_train.csv')
-    train_set=train.drop(['label'],axis=1)
-    train_set = np.array(train, dtype = 'float32')
     
-    X_train = train_set[:, 1:] / 255
-    y_train = train_set[:, 0]
+    train_df = pd.read_csv('dataset/sign_mnist_train.csv')
+
+    X_train = train_df.iloc[:, 1:].values /255.0
+    X_train = X_train.reshape(-1,28,28,1)
     
-    #Visualize train images
-    plt.figure(figsize=(10, 10))
+    y_train = train_df.iloc[:, 0]
+    
+    plt.figure(figsize=(10,10))
     for i in range(25):
-        plt.subplot(5, 5, i + 1)
+        plt.subplot(5,5,i+1)
         plt.xticks([])
         plt.yticks([])
         plt.grid(False)
-        plt.imshow(X_train[i].reshape((28,28)), cmap=plt.cm.binary)
-        label_index = int(y_train[i])
-        plt.title(class_names[label_index])
+        plt.imshow(X_train[i], cmap="gray")
+        plt.xlabel(class_names[y_train[i]])
     plt.show()
     
 ################################################################################################

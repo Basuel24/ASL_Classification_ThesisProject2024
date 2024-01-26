@@ -166,28 +166,27 @@ with tabs[1]:
     mapping_letter = {v:k for k,v in mapping_letter.items()}
 ##################################################################
     def to_image(array, label=True):
-    # Convert the input array to a NumPy array
-    array = np.array(array)
-
-    # Check if the array is empty
-    if array.size == 0:
-        print("Error: Empty array.")
-        return None  # or handle the error in an appropriate way
-
-    # Set the start index based on whether a label is included
-    start_idx = 1 if label else 0
-
-    # Calculate the expected size after considering the start index
-    expected_size = 28 * 28
-
-    # Check if the array has enough elements to reshape
-    if array[start_idx:].size < expected_size:
-        print(f"Error: Insufficient elements in the array to reshape into {expected_size}-dimensional image.")
-        return None  # or handle the error in an appropriate way
-
-    # Reshape the array into a (28, 28) image format
-    result = array[start_idx:].reshape(28, 28).astype(float)
+        # Convert the input array to a NumPy array
+        array = np.array(array)
     
+        # Check if the array is empty
+        if array.size == 0:
+            print("Error: Empty array.")
+            return None  # or handle the error in an appropriate way
+    
+        # Set the start index based on whether a label is included
+        start_idx = 1 if label else 0
+    
+        # Calculate the expected size after considering the start index
+        expected_size = 28 * 28
+    
+        # Check if the array has enough elements to reshape
+        if array[start_idx:].size < expected_size:
+            print(f"Error: Insufficient elements in the array to reshape into {expected_size}-dimensional image.")
+            return None  # or handle the error in an appropriate way
+    
+        # Reshape the array into a (28, 28) image format
+        result = array[start_idx:].reshape(28, 28).astype(float)
     return result
     
     #result_image = to_image(your_array, label=True)

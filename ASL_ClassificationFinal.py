@@ -167,7 +167,7 @@ with tabs[1]:
 ##################################################################
     def to_image(array, label = True):
         # Reshape an array into an image format
-        array = np.array(array)
+        array = np.array([array])
         start_idx = 1 if label else 0
         return array[start_idx:].reshape(28,28).astype(float)
 ##################################################################

@@ -154,6 +154,14 @@ with tabs[1]:
     # Load the dataset
     train = pd.read_csv('dataset/sign_mnist_train.csv')
     
+    # Identify and handle non-numeric values in the DataFrame
+    non_numeric_mask = ~train.applymap(np.isreal).all(1)
+    if non_numeric_mask.any():
+        print("Handling non-numeric values in the dataset.")
+        print("Rows with non-numeric values:")
+        print(train[non_numeric_mask])
+        train = train[~non_numeric_mask]
+    
     # Exclude the 'label' column from the conversion to NumPy array
     train_set = np.array(train.drop(columns=['label']), dtype='float32')
     
@@ -180,6 +188,7 @@ with tabs[1]:
     
     plt.subplots_adjust(hspace=0.4)
     plt.show()
+
 
 ################################################################################################
     #end of CNN Baseline Prediction

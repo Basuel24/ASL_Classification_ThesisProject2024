@@ -239,37 +239,78 @@ def to_image(array, label=True):
     #end of CNN Baseline Prediction
 ################################################################################################
 with tabs[2]:
+
+##################################################################
+    alphab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    mapping_letter = {}
     count = 0
+##################################################################
+    train_df = pd.read_csv('dataset/train.csv')
+    train_df.rename(columns={'label':'Label'},inplace = True)
+    train_df = train_df.sample(frac = 1.0).reset_index(drop = True)
+##################################################################
+    for i,l in enumerate(alphab):
+        mapping_letter[l] = i
+    mapping_letter = {v:k for k,v in mapping_letter.items()}
+##################################################################
+
+def to_image(array, label=True):
+    # Convert the input array to a NumPy array
+    array = np.array(array)
+
+    # Check if the array is empty
+    if array.size == 0:
+        print("Error: Empty array.")
+        return None  # or handle the error in an appropriate way
+
+    # Set the start index based on whether a label is included
+    start_idx = 1 if label else 0
+
+    # Calculate the expected size after considering the start index
+    expected_size = 28 * 28
+
+    # Check if the array has enough elements to reshape
+    if array[start_idx:].size < expected_size:
+        print(f"Error: Insufficient elements in the array to reshape into {expected_size}-dimensional image.")
+        return None  # or handle the error in an appropriate way
+
+    # Reshape the array into a (28, 28) image format
+    result = array[start_idx:].reshape(28, 28).astype(float)
+
+    return result
+##################################################################
     # Display some pictures of the dataset
     fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12),
                             subplot_kw={'xticks': [], 'yticks': []})
 ##################################################################
-    modelSA = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
-    #               1   2   3   4   5   6   7   8   9      10  11  12  13  14  15  16  17  18  19  20  21  22  23  24 
-    class_names = ['A','B','C','D','E','F','G','H','I','','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y']
-    for i, ax in enumerate(axes.flat):
+    #modelCNN = tf.keras.models.load_model("CNN/100CNN_model.h5")
+    #modelCNN = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
+    modelCNN = tf.keras.models.load_model("SA/80 epochs/sa_model.h5")
+##################################################################
+    #               1   2   3   4   5   6   7   8   9  {J} 10  11  12  13  14  15  16  17  18  19  20  21  22  23  24 {Z}
+    class_names = ['A','B','C','D','E','F','G','H','I','','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','']
+    a = 0 
+    for i, ax in enumerate(axes.flat):        
         inputImage = to_image(train_df.iloc[i])
         img = inputImage
-        image_inputSA = asarray(inputImage)
-        image_inputSA = np.expand_dims(image_inputSA, axis = 0)
-        
-        predictionSA = modelSA.predict(image_inputSA)
-        
-        MaxPositionindex=np.argmax(predictionSA, axis=1)        
+        image_input = asarray(inputImage)
+        image_input = np.expand_dims(image_input, axis = 0)
+        prediction = modelCNN.predict(image_input)
+        MaxPositionindex=np.argmax(prediction, axis=1)
         title = mapping_letter[train_df.Label[i]]
         
         indices = np.where(prediction>= 0.0001)
         arr = prediction[prediction>= 0.0001]  
         
         if (title == class_names[MaxPositionindex[0]]):
-            ax.set_title("T: ("+title+") P: ("+class_names[MaxPositionindex[0]]+")", fontsize = 15).set_color('black')
-            ax.imshow(img, cmap = 'Oranges_r')
+            ax.set_title("T: ("+title+") P: ("+class_names[MaxPositionindex[0]]+") ", fontsize = 15).set_color('black')
+            ax.imshow(img)
             for j in range(len(arr)):
                 ax.set_ylabel("%0.2f%%" % (arr[j] * 100))
                 ax.set_xlabel("correct")
             count += 1
         else:
-            ax.set_title("T: ("+title+") P: ("+class_names[MaxPositionindex[0]]+")", fontsize = 15).set_color('red')
+            ax.set_title("T: ("+title+") P: ("+class_names[MaxPositionindex[0]]+") ", fontsize = 15).set_color('red')
             ax.imshow(img, cmap = 'gray')
             for j in range(len(arr)):
                 ax.set_ylabel("%0.2f%%" % (arr[j] * 100))
@@ -281,8 +322,9 @@ with tabs[2]:
     #plt.show()
     st.pyplot(fig)
 ################################################################################################
-    #end of CNN with Style Augmentation Prediction
+
 ################################################################################################
+    #end of CNN Baseline Prediction
 with tabs[3]:
     ################################################################################################
     #CNN Graph

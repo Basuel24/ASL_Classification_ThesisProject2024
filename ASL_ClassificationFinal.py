@@ -43,11 +43,9 @@ with tabs[0]:
                     image_input = asarray(image)
                     image_input = resize(image_input, (28, 28, 1))
                     image_input = np.expand_dims(image_input, axis = 0)
-                    #CNN
-                    modelCNN = tf.keras.models.load_model("CNN/50epoch_CNN_model.h5")
-                    #modelCNN = tf.keras.models.load_model("CNN/cnn_model.h5")
-                    modelCNN = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
                     
+                    #CNN
+                    modelCNN = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
                     
                     predictionCNN = modelCNN.predict(image_input)
                     MaxPositionCNN=np.argmax(predictionCNN)  

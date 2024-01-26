@@ -149,54 +149,25 @@ with tabs[1]:
     import pandas as pd
     import numpy as np
     import random
-    import matplotlib.pyplot as plt
-    
-    # Load the dataset
+    import matplotlib.pyplot as plt 
     train = pd.read_csv('dataset/sign_mnist_train.csv')
+    train_set = np.array(train, dtype = 'float32')
     
-    # Identify and handle non-numeric values in the DataFrame
-    non_numeric_mask = ~train.applymap(np.isreal).all(1)
-    if non_numeric_mask.any():
-        print("Handling non-numeric values in the dataset.")
-        print("Rows with non-numeric values:")
-        print(train[non_numeric_mask])
-        train = train[~non_numeric_mask]
+    X_train = train_set[:, 1:] / 255
+    y_train = train_set[:, 0]
     
-    # Exclude the 'label' column from the conversion to NumPy array
-    train_set = np.array(train.drop(columns=['label']), dtype='float32')
-    
-    class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y']
-    
-    # Define the dimensions of the plot grid
-    W_grid = 5
-    L_grid = 5
-    fig, axes = plt.subplots(L_grid, W_grid, figsize=(10, 10))
-    axes = axes.ravel()  # flatten the 5x5 matrix into a 1D array
-    n_train = len(train_set)
-    
-    # Select a random number from 0 to n_train
-    for i in np.arange(0, W_grid * L_grid):
-        # Select a random number
-        index = np.random.randint(0, n_train)
-        
-        # Read and display an image with the selected index
-        axes[i].imshow(train_set[index].reshape((28, 28)))
-        
-        label_index = int(train['label'][index])  # Access the label from the original DataFrame
-        axes[i].set_title(class_names[label_index], fontsize=8)
-        axes[i].axis('off')
-    
-    plt.subplots_adjust(hspace=0.4)
+    #Visualize train images
+    plt.figure(figsize=(10, 10))
+    for i in range(25):
+        plt.subplot(5, 5, i + 1)
+        plt.xticks([])
+        plt.yticks([])
+        plt.grid(False)
+        plt.imshow(X_train[i].reshape((28,28)), cmap=plt.cm.binary)
+        label_index = int(y_train[i])
+        plt.title(class_names[label_index])
     plt.show()
-
-
-################################################################################################
-    #end of CNN Baseline Prediction
-################################################################################################
-with tabs[2]:
     
-    import random
-
 ################################################################################################
     #end of CNN Baseline Prediction
 with tabs[3]:

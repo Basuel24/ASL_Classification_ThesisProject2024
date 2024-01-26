@@ -151,6 +151,7 @@ with tabs[1]:
     import random
     import matplotlib.pyplot as plt 
     train = pd.read_csv('dataset/sign_mnist_train.csv')
+    train_set=train.drop(['label'],axis=1)
     train_set = np.array(train, dtype = 'float32')
     
     X_train = train_set[:, 1:] / 255

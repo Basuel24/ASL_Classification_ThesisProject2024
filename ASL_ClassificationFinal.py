@@ -158,8 +158,11 @@ with tabs[1]:
     count = 0
 ##################################################################
     train_df = pd.read_csv('dataset/train.csv')
+    train_df = np.array(train, dtype = 'float32'))
     train_df.rename(columns={'label':'Label'},inplace = True)
     train_df = train_df.sample(frac = 1.0).reset_index(drop = True)
+    
+
 ##################################################################
     for i,l in enumerate(alphab):
         mapping_letter[l] = i

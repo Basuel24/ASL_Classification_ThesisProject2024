@@ -146,7 +146,27 @@ with tabs[0]:
     
 ################################################################################################
 with tabs[1]:
-   import streamlit as st
+    import random
+    train = pd.read_csv('dataset/train.csv')
+    train_set = np.array(train, dtype = 'float32')
+    class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y' ]
+    
+    # Define the dimensions of the plot grid 
+    W_grid = 5
+    L_grid = 5
+    fig, axes = plt.subplots(L_grid, W_grid, figsize = (10,10))
+    axes = axes.ravel() # flaten the 15 x 15 matrix into 225 array
+    n_train = len(train_set) # get the length of the train dataset
+    # Select a random number from 0 to n_train
+    for i in np.arange(0, W_grid * L_grid): # create evenly spaces variables 
+        # Select a random number
+        index = np.random.randint(0, n_train)
+        # read and display an image with the selected index    
+        axes[i].imshow( train_set[index,1:].reshape((28,28)) )
+        label_index = int(train_set[index,0])
+        axes[i].set_title(class_names[label_index], fontsize = 8)
+        axes[i].axis('off')
+    plt.subplots_adjust(hspace=0.4)
 ################################################################################################
     #end of CNN Baseline Prediction
 ################################################################################################

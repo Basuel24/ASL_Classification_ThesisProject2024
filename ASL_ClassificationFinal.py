@@ -187,7 +187,7 @@ with tabs[1]:
     
         # Reshape the array into a (28, 28) image format
         result = array[start_idx:].reshape(28, 28).astype(float)
-    return result
+        return result
     
     #result_image = to_image(your_array, label=True)
 ##################################################################

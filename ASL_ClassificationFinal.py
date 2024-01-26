@@ -195,9 +195,9 @@ with tabs[1]:
     fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12),
                             subplot_kw={'xticks': [], 'yticks': []})
 ##################################################################
-    #modelCNN = tf.keras.models.load_model("CNN/100CNN_model.h5")
+    modelCNN = tf.keras.models.load_model("CNN/100CNN_model.h5")
     #modelCNN = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
-    modelCNN = tf.keras.models.load_model("SA/80 epochs/sa_model.h5")
+    #modelCNN = tf.keras.models.load_model("SA/80 epochs/sa_model.h5")
 ##################################################################
     #               1   2   3   4   5   6   7   8   9  {J} 10  11  12  13  14  15  16  17  18  19  20  21  22  23  24 {Z}
     class_names = ['A','B','C','D','E','F','G','H','I','','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','']
@@ -207,13 +207,6 @@ with tabs[1]:
         img = inputImage
         image_input = asarray(inputImage)
         image_input = np.expand_dims(image_input, axis = 0)
-
-        # Example of model initialization and training (adjust based on your actual code)
-        modelCNN = YourCNNModel()
-        modelCNN.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-        modelCNN.fit(train_data, train_labels, epochs=10)  # Adjust the training data and labels accordingly
-
-        adas
         prediction = modelCNN.predict(image_input)
         MaxPositionindex=np.argmax(prediction, axis=1)
         title = mapping_letter[train_df.Label[i]]

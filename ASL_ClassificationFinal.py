@@ -44,7 +44,7 @@ with tabs[0]:
                     image_input = resize(image_input, (28, 28, 1))
                     image_input = np.expand_dims(image_input, axis = 0)
                     #CNN
-                    #modelCNN = tf.keras.models.load_model("CNN/50epoch_CNN_model.h5")
+                    modelCNN = tf.keras.models.load_model("CNN/50epoch_CNN_model.h5")
                     #modelCNN = tf.keras.models.load_model("CNN/cnn_model.h5")
                     modelCNN = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
                     
@@ -207,6 +207,13 @@ with tabs[1]:
         img = inputImage
         image_input = asarray(inputImage)
         image_input = np.expand_dims(image_input, axis = 0)
+
+        # Example of model initialization and training (adjust based on your actual code)
+        modelCNN = YourCNNModel()
+        modelCNN.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+        modelCNN.fit(train_data, train_labels, epochs=10)  # Adjust the training data and labels accordingly
+
+        adas
         prediction = modelCNN.predict(image_input)
         MaxPositionindex=np.argmax(prediction, axis=1)
         title = mapping_letter[train_df.Label[i]]

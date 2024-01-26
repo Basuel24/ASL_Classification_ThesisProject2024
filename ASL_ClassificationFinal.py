@@ -166,16 +166,14 @@ with tabs[1]:
         return array[start_idx:].reshape(28,28).astype(float)
 ##################################################################
     # Display some pictures of the dataset
-    fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12),
-                            subplot_kw={'xticks': [], 'yticks': []})
+    fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
 ##################################################################
-    #modelCNN = tf.keras.models.load_model("CNN/100CNN_model.h5")
-    #modelCNN = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
     modelCNN = tf.keras.models.load_model("SA/80 epochs/sa_model.h5")
 ##################################################################
     #               1   2   3   4   5   6   7   8   9  {J} 10  11  12  13  14  15  16  17  18  19  20  21  22  23  24 {Z}
     class_names = ['A','B','C','D','E','F','G','H','I','','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','']
     a = 0 
+    print(train_df.iloc[i])
     for i, ax in enumerate(axes.flat):        
         inputImage = to_image(train_df.iloc[i])
         img = inputImage

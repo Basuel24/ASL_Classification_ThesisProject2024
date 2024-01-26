@@ -194,8 +194,7 @@ with tabs[1]:
     # Display some pictures of the dataset
     fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
 ##################################################################
-    modelCNN = tf.keras.models.load_model("CNN/100CNN_model.h5")
-    #modelCNN = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
+    modelCNN = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
     #modelCNN = tf.keras.models.load_model("SA/80 epochs/sa_model.h5")
 ##################################################################
     #               1   2   3   4   5   6   7   8   9  {J} 10  11  12  13  14  15  16  17  18  19  20  21  22  23  24 {Z}

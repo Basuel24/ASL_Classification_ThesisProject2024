@@ -218,41 +218,41 @@ with tabs[1]:
     #end of CNN Baseline Prediction
 ################################################################################################
 with tabs[2]:
-import streamlit as st
-import pandas as pd
-from PIL import Image
-
-# Load your dataset
-df = pd.read_csv('dataset/train.csv')
-
-# Display images in a 5x5 grid
-st.title("Image Display from DataFrame - 5x5 Grid")
-
-# Check if the 'image_path' column exists in the DataFrame
-if 'image_path' in df.columns:
-    # Check if there are enough images to display
-    if len(df) >= 25:
-        # Create a grid layout
-        col1, col2, col3, col4, col5 = st.beta_columns(5)
-
-        # Loop through each row in the DataFrame
-        for index, row in df.iterrows():
-            image_path = row['image_path']
-
-            # Open the image using Pillow (PIL)
-            image = Image.open(image_path)
-
-            # Display the image in the corresponding column
-            with eval(f"col{index % 5 + 1}"):
-                st.image(image, caption=f"Image {index + 1}", use_column_width=True)
-
-            # Add a newline after every 5 images
-            if (index + 1) % 5 == 0 and index != 0:
-                st.write("\n")
+    import streamlit as st
+    import pandas as pd
+    from PIL import Image
+    
+    # Load your dataset
+    df = pd.read_csv('dataset/train.csv')
+    
+    # Display images in a 5x5 grid
+    st.title("Image Display from DataFrame - 5x5 Grid")
+    
+    # Check if the 'image_path' column exists in the DataFrame
+    if 'image_path' in df.columns:
+        # Check if there are enough images to display
+        if len(df) >= 25:
+            # Create a grid layout
+            col1, col2, col3, col4, col5 = st.beta_columns(5)
+    
+            # Loop through each row in the DataFrame
+            for index, row in df.iterrows():
+                image_path = row['image_path']
+    
+                # Open the image using Pillow (PIL)
+                image = Image.open(image_path)
+    
+                # Display the image in the corresponding column
+                with eval(f"col{index % 5 + 1}"):
+                    st.image(image, caption=f"Image {index + 1}", use_column_width=True)
+    
+                # Add a newline after every 5 images
+                if (index + 1) % 5 == 0 and index != 0:
+                    st.write("\n")
+        else:
+            st.warning("Not enough images in the dataset to display a 5x5 grid.")
     else:
-        st.warning("Not enough images in the dataset to display a 5x5 grid.")
-else:
-    st.warning("The 'image_path' column is not found in the DataFrame.")
+        st.warning("The 'image_path' column is not found in the DataFrame.")
 
 ################################################################################################
     #end of CNN Baseline Prediction

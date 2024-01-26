@@ -164,8 +164,11 @@ with tabs[1]:
         plt.xticks([])
         plt.yticks([])
         plt.grid(False)
-        plt.imshow(X_train[i], cmap="gray")
-        plt.xlabel(class_names[y_train[i]])
+        plt.imshow(X_train[i].reshape((28,28)), cmap=plt.cm.binary)
+        #plt.imshow(X_train[i], cmap="gray")
+        label_index = int(y_train[i])
+        plt.title(class_names[label_index])
+        #plt.xlabel(class_names[y_train[i]])
     plt.show()
     
 ################################################################################################

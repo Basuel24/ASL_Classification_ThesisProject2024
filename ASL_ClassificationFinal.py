@@ -152,41 +152,41 @@ with tabs[1]:
 ################################################################################################
 with tabs[2]:
     import streamlit as st
-import pandas as pd
-from PIL import Image
-
-# Load your dataset
-df = pd.read_csv('dataset/train.csv')
-
-# Display 5 rows and 5 columns of images
-st.title("Image Display - 5x5 Grid")
-
-# Check if the DataFrame is not empty
-if not df.empty:
-    # Check if there are enough images to display
-    if len(df) >= 25:
-        # Create a grid layout
-        for i in range(5):
-            st.write("\n")
-            row = st.beta_container()
-
-            # Loop through each column in the row
-            for j in range(5):
-                index = i * 5 + j
-
-                # Check if the index is within the number of rows in the DataFrame
-                if index < len(df):
-                    # Open the image using Pillow (PIL)
-                    image_path = df['image_path'].iloc[index]
-                    image = Image.open(image_path)
-
-                    # Display the image in the column
-                    with row:
-                        st.image(image, caption=f"Image {index + 1}", use_column_width=True)
+    import pandas as pd
+    from PIL import Image
+    
+    # Load your dataset
+    df = pd.read_csv('dataset/train.csv')
+    
+    # Display 5 rows and 5 columns of images
+    st.title("Image Display - 5x5 Grid")
+    
+    # Check if the DataFrame is not empty
+    if not df.empty:
+        # Check if there are enough images to display
+        if len(df) >= 25:
+            # Create a grid layout
+            for i in range(5):
+                st.write("\n")
+                row = st.beta_container()
+    
+                # Loop through each column in the row
+                for j in range(5):
+                    index = i * 5 + j
+    
+                    # Check if the index is within the number of rows in the DataFrame
+                    if index < len(df):
+                        # Open the image using Pillow (PIL)
+                        image_path = df['image_path'].iloc[index]
+                        image = Image.open(image_path)
+    
+                        # Display the image in the column
+                        with row:
+                            st.image(image, caption=f"Image {index + 1}", use_column_width=True)
+        else:
+            st.warning("Not enough images in the dataset to display a 5x5 grid.")
     else:
-        st.warning("Not enough images in the dataset to display a 5x5 grid.")
-else:
-    st.warning("The DataFrame is empty.")
+        st.warning("The DataFrame is empty.")
 
 ################################################################################################
     #end of CNN Baseline Prediction

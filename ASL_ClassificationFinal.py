@@ -161,7 +161,6 @@ with tabs[1]:
     st.markdown("<h5 style='text-align: left;'> Predicted = (" + str(count) + "/40) </h5>", unsafe_allow_html=True)
     plt.tight_layout(pad=0.5)
     st.pyplot(fig)
-
 # Tab 3
 with tabs[2]:
     count = 0

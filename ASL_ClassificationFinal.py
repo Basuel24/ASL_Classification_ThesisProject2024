@@ -152,9 +152,6 @@ with tabs[0]:
     
 ################################################################################################
 with tabs[1]:
-    train = pd.read_csv('dataset/train.csv')
-    train_set = np.array(train, dtype = 'float32')
-    labels = train['label'].values
 ##################################################################
     alphab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     mapping_letter = {}

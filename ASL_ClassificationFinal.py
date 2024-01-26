@@ -146,9 +146,13 @@ with tabs[0]:
     
 ################################################################################################
 with tabs[1]:
+    import pandas as pd
+    import numpy as np
     import random
-    train_set = pd.read_csv('dataset/train.csv')
-    #train_set = np.array(train, dtype = 'float32')
+    import matplotlib.pyplot as plt 
+    train = pd.read_csv('dataset/sign_mnist_train.csv')
+    train_set = np.array(train, dtype = 'float32')
+    
     class_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y' ]
     
     # Define the dimensions of the plot grid 

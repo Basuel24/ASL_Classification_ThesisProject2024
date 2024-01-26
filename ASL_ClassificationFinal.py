@@ -244,10 +244,7 @@ with tabs[2]:
     fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12),
                             subplot_kw={'xticks': [], 'yticks': []})
 ##################################################################
-    #modelSA = tf.keras.models.load_model("SA/50epoch_CNN_Model.h5")
-    #modelSA = tf.keras.models.load_model("SA/1new50SA_model.h5")
     modelSA = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")
-    #modelSA = tf.keras.models.load_model("SA/HorizontalFlipFalse50SA_model.h5")
     #               1   2   3   4   5   6   7   8   9      10  11  12  13  14  15  16  17  18  19  20  21  22  23  24 
     class_names = ['A','B','C','D','E','F','G','H','I','','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y']
     for i, ax in enumerate(axes.flat):
@@ -255,6 +252,7 @@ with tabs[2]:
         img = inputImage
         image_inputSA = asarray(inputImage)
         image_inputSA = np.expand_dims(image_inputSA, axis = 0)
+        
         predictionSA = modelSA.predict(image_inputSA)
         
         MaxPositionindex=np.argmax(predictionSA, axis=1)        

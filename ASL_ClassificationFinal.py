@@ -158,8 +158,7 @@ with tabs[2]:
     
     from PIL import Image
     from io import BytesIO
-    from IPython.display import HTML
-
+    
     pd.set_option('display.max_colwidth', -1)
     
     def get_thumbnail(path):
@@ -174,9 +173,6 @@ with tabs[2]:
             im.save(buffer, 'jpeg')
             return base64.b64encode(buffer.getvalue()).decode()
     
-    def image_formatter(im):
-        return f'<img src="data:image/jpeg;base64,{image_base64(im)}">'
-
     dogs = pd.read_csv('dataset/train.csv')
     dogs = dogs.sample(20)
     dogs['file'] = dogs.id.map(lambda id: f'../input/train/{id}.jpg')

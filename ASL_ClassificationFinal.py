@@ -153,10 +153,8 @@ with tabs[1]:
     
     train_df = pd.read_csv('dataset/sign_mnist_train.csv')
 
-    X_train = train_df.iloc[:, 1:].values /255.0
-    X_train = X_train.reshape(-1,28,28,1)
-    
-    y_train = train_df.iloc[:, 0]
+    #X_train = train_df.iloc[:, 1:].values /255.0
+    #y_train = train_df.iloc[:, 0]
     
     plt.figure(figsize=(10,10))
     for i in range(25):

@@ -192,8 +192,7 @@ with tabs[1]:
     #result_image = to_image(your_array, label=True)
 ##################################################################
     # Display some pictures of the dataset
-    fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12),
-                            subplot_kw={'xticks': [], 'yticks': []})
+    fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12), subplot_kw={'xticks': [], 'yticks': []})
 ##################################################################
     modelCNN = tf.keras.models.load_model("CNN/100CNN_model.h5")
     #modelCNN = tf.keras.models.load_model("CNN/80 epochs/cnn_model.h5")

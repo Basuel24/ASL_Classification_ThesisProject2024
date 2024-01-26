@@ -165,19 +165,12 @@ with tabs[1]:
         mapping_letter[l] = i
     mapping_letter = {v:k for k,v in mapping_letter.items()}
 ##################################################################
-    def to_image(array, start_idx=0):
-        if len(array) == 0:
-            # Handle empty array case (return a default image or raise an error)
-            raise ValueError("Input array is empty")
-        else:
-            return array[start_idx:].reshape(28, 28).astype(float)
-##################################################################
-    
-    #def to_image(array, label = True):
-        ## Reshape an array into an image format
-        #array = np.array([array])
-        #start_idx = 1 if label else 0
-        #return array[start_idx:].reshape(28,28).astype(float)
+    def to_image(array, label = True):
+        # Reshape an array into an image format
+        array = np.array([array])
+        print(array)
+        start_idx = 1 if label else 0
+        return array[start_idx:].reshape(28,28).astype(float)
 ##################################################################
     # Display some pictures of the dataset
     fig, axes = plt.subplots(nrows=5, ncols=8, figsize=(12, 12),

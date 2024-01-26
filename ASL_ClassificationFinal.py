@@ -175,7 +175,7 @@ with tabs[1]:
     a = 0 
     
     for i, ax in enumerate(axes.flat):        
-        inputImage = to_image(train_df.iloc[i])
+        inputImage = train_df.iloc[i]
         img = inputImage
         image_input = asarray(inputImage)
         image_input = np.expand_dims(image_input, axis = 0)
